@@ -5,10 +5,11 @@ import { ShopComponent } from './pages/shop/shop.component';
 import { NgIf } from '@angular/common';
 import { HeaderComponent } from './shared/header/header.component';
 import { FooterComponent } from './shared/footer/footer.component';
+import { ProfileComponent } from './pages/profile/profile.component';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, HeaderComponent, FooterComponent, HomeComponent, ShopComponent, NgIf],
+  imports: [RouterOutlet, HeaderComponent, FooterComponent, HomeComponent, ShopComponent, ProfileComponent, NgIf],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })

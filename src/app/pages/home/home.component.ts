@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 
 @Component({
   selector: 'app-home',
@@ -7,5 +7,11 @@ import { Component } from '@angular/core';
   styleUrl: './home.component.scss'
 })
 export class HomeComponent {
+
+  @Output() selectedPage: EventEmitter<string> = new EventEmitter();
+
+  openShop(): void {
+    this.selectedPage.emit('shop');
+  }
 
 }
