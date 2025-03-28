@@ -2,6 +2,8 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ProductComponent } from './shop-item/shop-item.component';
+import { MatButtonModule } from '@angular/material/button';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 export interface Product {
   id: number
@@ -13,7 +15,7 @@ export interface Product {
 
 @Component({
   selector: 'app-shop',
-  imports: [CommonModule, FormsModule, ProductComponent],
+  imports: [CommonModule, FormsModule, ProductComponent, MatButtonModule],
   templateUrl: './shop.component.html',
   styleUrls: ['./shop.component.scss']
 })
@@ -31,6 +33,8 @@ export class ShopComponent {
 
   newProduct: Product = { id: this.getNextId(), name: '', description: '', price: 0, isInCart: false };
 
+  constructor(private snackBar: MatSnackBar) {}
+
   addProduct(): void {
     if (this.newProduct.name && this.newProduct.description && this.newProduct.price > 0) {
       this.products.push({ ...this.newProduct });
@@ -38,7 +42,18 @@ export class ShopComponent {
       console.log('New product added with id: ' + this.newProduct.id);
 
       this.newProduct = { id: this.getNextId(), name: '', description: '', price: 0, isInCart: false };
+    } else {
+      this.showSnackbar('Invalid input values!');
     }
+  }
+
+  showSnackbar(message: string): void {
+    this.snackBar.open(message, 'Close', {
+      duration: 3000,
+      horizontalPosition: 'center',
+      verticalPosition: 'top',
+      panelClass: ['snackbar-error']
+    });
   }
 
   addToCart(product: Product): void {

@@ -5,21 +5,11 @@
     <input type="text" [(ngModel)]="newProduct.name" placeholder="Product Name">
     <input type="text" [(ngModel)]="newProduct.description" placeholder="Description">
     <input type="number" [(ngModel)]="newProduct.price" placeholder="Price">
-    <button (click)="addProduct()">Add Product</button>
+    <button mat-stroked-button (click)="addProduct()">Add Product</button>
   </div>
 
   <div class="product-grid">
     @for (product of products; track trackById($index, product)) {
-      <!--
-      <div class="product-card">
-        <h2>{{ product.name }}</h2>
-        <p>{{ product.description }}</p>
-        <p class="price">${{ product.price }}</p>
-        <button [ngClass]="{'clicked': product.isInCart}" (click)="addToCart(product)">
-          Add to Cart
-        </button>
-      </div>
-      -->
       <app-product [product]="product" (inCart)="addToCart($event)"></app-product>
     }
   </div>

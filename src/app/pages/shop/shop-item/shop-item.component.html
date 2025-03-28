@@ -3,8 +3,9 @@
   <p>{{ product.description }}</p>
   <div class="product-footer">
       <p class="price">${{ product.price }}</p>
-      <button [ngClass]="{'clicked': product.isInCart}" (click)="toggleInCart()">
-          @if (product.isInCart) { Remove } @else { Add to Cart }
+      <button mat-fab extended [ngClass]="{'clicked': product.isInCart}" (click)="toggleInCart()">
+        @if (product.isInCart) { <mat-icon>cancel</mat-icon> } @else { <mat-icon>shopping_cart</mat-icon> }
+        @if (product.isInCart) { Remove } @else { Add to Cart }
       </button>
   </div>
 </div>

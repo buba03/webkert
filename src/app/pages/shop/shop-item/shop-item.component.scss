@@ -37,8 +37,7 @@
     background: var(--primary-color);
     color: var(--bg-color);
     border: none;
-    padding: 8px 12px;
-    border-radius: 4px;
+    border-radius: 10px;
     cursor: pointer;
     transition: 0.3s;
 
@@ -54,8 +53,9 @@
     }
 
     &.clicked:hover {
-      background: var(--primary-color);
-      color: var(--bg-color);
+      background: var(--bg-color);
+      color: var(--primary-color);
+      border: 2px solid var(--primary-color);
       opacity: 0.8;
     }
   }
