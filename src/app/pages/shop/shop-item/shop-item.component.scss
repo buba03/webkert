@@ -13,12 +13,17 @@
   }
 
   mat-card-header {
-    padding-bottom: 0;
+    text-align: left;
+    padding-bottom: 0px;
   }
 
   mat-card-title {
     color: var(--title-color);
     font-size: 1.2rem;
+  }
+
+  mat-card-subtitle {
+    color: var(--subtitle-color);
   }
 
   mat-card-content {

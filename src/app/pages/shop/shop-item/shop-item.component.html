@@ -1,7 +1,7 @@
 <mat-card class="product-card" appearance="outlined">
   <mat-card-header>
     <mat-card-title>{{ product.name }}</mat-card-title>
-    <mat-card-subtitle>{{ product.type }}</mat-card-subtitle>
+    <mat-card-subtitle>{{ product.type | productTypeFormatter }}</mat-card-subtitle>
   </mat-card-header>
   <img mat-card-image src="{{'images/products/' + product.image}}" alt="{{ product.name }}">
   <mat-card-content>{{ product.description }}</mat-card-content>
