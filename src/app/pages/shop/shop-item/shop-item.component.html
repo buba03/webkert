@@ -1,11 +1,14 @@
-<div class="product-card">
-  <h2>{{ product.name }}</h2>
-  <p>{{ product.description }}</p>
-  <div class="product-footer">
-      <p class="price">${{ product.price }}</p>
-      <button mat-fab extended [ngClass]="{'clicked': product.isInCart}" (click)="toggleInCart()">
-        @if (product.isInCart) { <mat-icon>cancel</mat-icon> } @else { <mat-icon>shopping_cart</mat-icon> }
-        @if (product.isInCart) { Remove } @else { Add to Cart }
-      </button>
-  </div>
-</div>
+<mat-card class="product-card" appearance="outlined">
+  <mat-card-header>
+    <mat-card-title>{{ product.name }}</mat-card-title>
+  </mat-card-header>
+  <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
+  <mat-card-content>{{ product.description }}</mat-card-content>
+  <mat-card-actions>
+    <p class="price">${{ product.price }}</p>
+    <button mat-fab extended [ngClass]="{'clicked': product.isInCart}" (click)="toggleInCart()">
+      @if (product.isInCart) { <mat-icon>cancel</mat-icon> } @else { <mat-icon>shopping_cart</mat-icon> }
+      @if (product.isInCart) { Remove } @else { Add to Cart }
+    </button>
+  </mat-card-actions>
+</mat-card>

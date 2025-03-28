@@ -1,5 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormsModule } from '@angular/forms';
 import { ProductComponent } from './shop-item/shop-item.component';
 import { MatButtonModule } from '@angular/material/button';
@@ -15,7 +17,7 @@ export interface Product {
 
 @Component({
   selector: 'app-shop',
-  imports: [CommonModule, FormsModule, ProductComponent, MatButtonModule],
+  imports: [CommonModule, FormsModule, ProductComponent, MatButtonModule, FormsModule, MatFormFieldModule, MatInputModule],
   templateUrl: './shop.component.html',
   styleUrls: ['./shop.component.scss']
 })

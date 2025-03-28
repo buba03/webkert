@@ -2,10 +2,22 @@
   <h1>{{ title }}</h1>
 
   <div class="add-product">
-    <input type="text" [(ngModel)]="newProduct.name" placeholder="Product Name">
-    <input type="text" [(ngModel)]="newProduct.description" placeholder="Description">
-    <input type="number" [(ngModel)]="newProduct.price" placeholder="Price">
-    <button mat-stroked-button (click)="addProduct()">Add Product</button>
+    <mat-form-field appearance="outline">
+      <mat-label>Product Name</mat-label>
+      <input matInput type="text" [(ngModel)]="newProduct.name">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Description</mat-label>
+      <input matInput type="text" [(ngModel)]="newProduct.description">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Price</mat-label>
+      <input matInput type="number" [(ngModel)]="newProduct.price">
+    </mat-form-field>
+
+    <button mat-raised-button (click)="addProduct()">Add Product</button>
   </div>
 
   <div class="product-grid">

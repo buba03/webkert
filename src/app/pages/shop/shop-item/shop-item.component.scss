@@ -1,31 +1,38 @@
 .product-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   background: var(--bg-color);
-  padding: 15px;
   border-radius: 8px;
   box-shadow: var(--box-shadow);
-  text-align: left;
   transition: transform 0.2s;
-  height: 85%;
+  height: 100%;
 
   &:hover {
     transform: scale(1.05);
   }
 
-  h2 {
+  mat-card-header {
+    padding-bottom: 0;
+  }
+
+  mat-card-title {
     color: var(--title-color);
     font-size: 1.2rem;
-    margin: 0 0 10px;
   }
 
-  p {
+  mat-card-content {
+    flex-grow: 1;
     color: var(--secondary-color);
-    margin: 5px 0;
+    padding-bottom: 10px;
   }
 
-  .product-footer {
+  mat-card-actions {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    padding: 10px 16px;
+    margin-top: auto;
   }
 
   .price {
@@ -37,9 +44,16 @@
     background: var(--primary-color);
     color: var(--bg-color);
     border: none;
-    border-radius: 10px;
+    border-radius: 16px;
     cursor: pointer;
     transition: 0.3s;
+    display: flex;
+    align-items: center;
+    padding: 8px 12px;
+
+    mat-icon {
+      margin-right: 5px;
+    }
 
     &:hover {
       background: var(--primary-color-hover);

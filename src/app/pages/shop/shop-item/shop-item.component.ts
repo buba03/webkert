@@ -3,11 +3,12 @@ import { Product } from '../shop.component';
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
+import { MatCardModule } from '@angular/material/card';
 
 @Component({
   selector: 'app-product',
   standalone: true,
-  imports: [CommonModule, MatButtonModule, MatIcon],
+  imports: [CommonModule, MatButtonModule, MatIcon, MatCardModule],
   templateUrl: './shop-item.component.html',
   styleUrls: ['./shop-item.component.scss']
 })
