@@ -2,31 +2,31 @@
     height: 100%;
     display: flex;
     flex-direction: column;
-    background-color: #fff;
+    background-color: var(--bg-color);
     border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    box-shadow: var(--box-shadow);
     padding: 40px 20px;
     text-align: center;
 }
 
 h1 {
-    color: #333;
+    color: var(--title-color);
     font-size: 36px;
     margin-bottom: 16px;
     font-weight: bold;
 }
 
 p {
-    color: #666;
+    color: var(--secondary-color);
     font-size: 20px;
     margin-bottom: 40px;
 }
 
-.tasks {
-    background-color: #007bff;
+.shop {
+    background-color: var(--primary-color);
     width: 300px;
     margin: 0 auto;
-    color: white;
+    color: var(--bg-color);
     border: none;
     border-radius: 15px;
     padding: 12px 30px;
@@ -35,6 +35,6 @@ p {
     transition: background-color 0.3s;
 }
 
-.tasks:hover {
-    background-color: #0056b3;
+.shop:hover {
+    background-color: var(--primary-color-hover);
 }

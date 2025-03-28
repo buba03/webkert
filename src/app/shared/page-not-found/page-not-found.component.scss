@@ -1,0 +1,22 @@
+h1 {
+    text-align: center;
+}
+
+button {
+    display: flex;
+    background-color: var(--primary-color);
+    width: 150px;
+    margin: 0 auto;
+    color: var(--bg-color);
+    border: none;
+    border-radius: 15px;
+    padding: 10px 15px;
+    font-size: 14px;
+    justify-content: center;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: var(--primary-color-hover);
+}
