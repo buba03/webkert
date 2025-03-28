@@ -4,7 +4,7 @@
   <div class="product-footer">
       <p class="price">${{ product.price }}</p>
       <button [ngClass]="{'clicked': product.isInCart}" (click)="toggleInCart()">
-          {{ product.isInCart ? 'Remove' : 'Add to Cart' }}
+          @if (product.isInCart) { Remove } @else { Add to Cart }
       </button>
   </div>
 </div>

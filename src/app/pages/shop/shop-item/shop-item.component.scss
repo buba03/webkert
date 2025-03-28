@@ -5,6 +5,7 @@
   box-shadow: var(--box-shadow);
   text-align: left;
   transition: transform 0.2s;
+  height: 85%;
 
   &:hover {
     transform: scale(1.05);
@@ -25,7 +26,6 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-top: 10px;
   }
 
   .price {

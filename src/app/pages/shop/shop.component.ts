@@ -24,7 +24,7 @@ export class ShopComponent {
   
   products: Product[] = [
     { id: 1, name: 'Abstract Painting', description: 'A colorful abstract painting.', price: 120, isInCart: false },
-    { id: 2, name: 'Landscape Art', description: 'A beautiful landscape scene.', price: 95, isInCart: false },
+    { id: 2, name: 'Landscape Art', description: 'A beautiful landscape scene. A beautiful landscape scene. A beautiful landscape scene. A beautiful landscape scene. A beautiful landscape scene.', price: 95, isInCart: false },
     { id: 3, name: 'Portrait Sketch', description: 'A detailed portrait sketch.', price: 75, isInCart: false },
     { id: 4, name: 'Modern Sculpture', description: 'A contemporary modern sculpture.', price: 15, isInCart: false },
   ];
