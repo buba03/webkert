@@ -1,0 +1,10 @@
+<div class="product-card">
+  <h2>{{ product.name }}</h2>
+  <p>{{ product.description }}</p>
+  <div class="product-footer">
+      <p class="price">${{ product.price }}</p>
+      <button [ngClass]="{'clicked': product.isInCart}" (click)="toggleInCart()">
+          {{ product.isInCart ? 'Remove' : 'Add to Cart' }}
+      </button>
+  </div>
+</div>
