@@ -14,6 +14,7 @@ interface Product {
   styleUrls: ['./shop.component.scss']
 })
 export class ShopComponent {
+  
   products: Product[] = [
     { name: 'Abstract Painting', description: 'A colorful abstract painting.', price: 120 },
     { name: 'Landscape Art', description: 'A beautiful landscape scene.', price: 95 },

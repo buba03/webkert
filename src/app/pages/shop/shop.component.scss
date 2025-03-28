@@ -11,10 +11,10 @@
     }
   
     .product-card {
-      background: #fff;
+      background: var(--bg-color);
       padding: 15px;
       border-radius: 8px;
-      box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+      box-shadow: var(--box-shadow);
       text-align: left;
       transition: transform 0.2s;
   
@@ -23,22 +23,24 @@
       }
   
       h2 {
+        color: var(--title-color);
         font-size: 1.2rem;
         margin: 0 0 10px;
       }
   
       p {
+        color: var(--secondary-color);
         margin: 5px 0;
       }
   
       .price {
         font-weight: bold;
-        color: #007bff;
+        color: var(--primary-color);
       }
   
       button {
-        background: #007bff;  /* Default blue background */
-        color: white;
+        background: var(--primary-color);
+        color: var(--bg-color);
         border: none;
         padding: 8px 12px;
         border-radius: 4px;
@@ -46,15 +48,19 @@
         transition: 0.3s;
   
         &:hover {
-          background: #0056b3;
+          background: var(--primary-color-hover);
         }
   
         &.clicked {
-          background: white;
-          color: #007bff;
-          border: 2px solid #007bff;
+          background: var(--bg-color);
+          color: var(--primary-color);
+          border: 2px solid var(--primary-color);
         }
-        
+        &.clicked:hover {
+          background: var(--bg-color-hover);
+          color: var(--primary-color-hover);
+          border: 2px solid var(--primary-color-hover);
+        }
       }
     }
   }
