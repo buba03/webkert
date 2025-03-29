@@ -8,7 +8,6 @@ import { MatButtonModule } from '@angular/material/button';
 import {MatSelectModule} from '@angular/material/select';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ProductTypePipe } from '../../shared/pipes/product-type.pipe';
-import { PricePipe } from '../../shared/pipes/price.pipe';
 
 export interface Product {
   id: number
@@ -22,7 +21,7 @@ export interface Product {
 
 @Component({
   selector: 'app-shop',
-  imports: [CommonModule, FormsModule, ProductComponent, MatButtonModule, FormsModule, MatFormFieldModule, MatInputModule, MatSelectModule, ProductTypePipe, PricePipe],
+  imports: [CommonModule, FormsModule, ProductComponent, MatButtonModule, FormsModule, MatFormFieldModule, MatInputModule, MatSelectModule, ProductTypePipe],
   templateUrl: './shop.component.html',
   styleUrls: ['./shop.component.scss']
 })
