@@ -1,0 +1,57 @@
+.form-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-width: 600px;
+  margin: auto;
+  text-align: center;
+  padding: 20px;
+
+  .form-card {
+    padding: 20px;
+    margin: 20px;
+    box-shadow: var(--box-shadow);
+  }
+
+  mat-card-title {
+    padding-bottom: 15px;
+    color: var(--secondary-color);
+  }
+
+  mat-form-field {
+    width: 100%;
+    display: block;
+    margin-top: 10px;
+  }
+
+  mat-radio-button {
+    padding-left: 20px;
+    padding-right: 0px !important;
+  }
+
+  .submit-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+
+    button {
+      background: var(--primary-color);
+      color: var(--bg-color);
+      border: none;
+      border-radius: 16px;
+      cursor: pointer;
+      transition: 0.3s;
+      display: flex;
+      align-items: center;
+      padding: 8px 20px;
+  
+      mat-icon {
+        margin-right: 5px;
+      }
+  
+      &:hover {
+        background: var(--primary-color-hover);
+      }
+    }  
+  }
+}

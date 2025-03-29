@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -10,7 +10,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { ProductTypePipe } from '../../shared/pipes/product-type.pipe';
 
 export interface Product {
-  id: number
+  id: number;
   name: string;
   type: "painting" | "whittling" | "drawing" | "misc";
   description: string;
