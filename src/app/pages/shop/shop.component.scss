@@ -4,7 +4,7 @@
   border-radius: 8px;
   box-shadow: var(--box-shadow);
   text-align: left;
-  max-width: 800px;
+  max-width: 1000px;
   margin: 20px auto;
   display: flex;
   flex-wrap: wrap;
@@ -15,17 +15,20 @@
   mat-form-field {
     flex: 1;
     min-width: 200px;
-
-    input {
-      font-size: 1rem;
-      color: var(--text-color);
-    }
   }
 
   button {
     height: 56px;
     align-self: stretch;
     border-radius: 4px;
+  }
+
+  .preview-image {
+    width: 100px;
+    height: auto;
+    margin-top: 10px;
+    border-radius: 8px;
+    box-shadow: var(--box-shadow);
   }
 }
 

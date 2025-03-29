@@ -13,9 +13,25 @@
     </mat-form-field>
 
     <mat-form-field appearance="outline">
+      <mat-label>Type</mat-label>
+      <mat-select [(value)]="newProduct.type">
+        @for (type of types; track $index) {
+          <mat-option [value]="type">{{ type | productTypeFormatter }}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>    
+
+    <mat-form-field appearance="outline">
       <mat-label>Price</mat-label>
       <input matInput type="number" [(ngModel)]="newProduct.price">
     </mat-form-field>
+
+    <!--
+    <label>Product Image</label>
+    <input type="file" (change)="onFileSelected($event)" accept="image/*">
+
+    <img *ngIf="imagePreview" [src]="imagePreview" alt="Preview" class="preview-image">
+    -->
 
     <button mat-stroked-button (click)="addProduct()">Add Product</button>
   </div>

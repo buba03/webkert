@@ -3,7 +3,7 @@
     <mat-card-title>{{ product.name }}</mat-card-title>
     <mat-card-subtitle>{{ product.type | productTypeFormatter }}</mat-card-subtitle>
   </mat-card-header>
-  <img mat-card-image src="{{'images/products/' + product.image}}" alt="{{ product.name }}">
+  @if (product.image) {<img mat-card-image src="{{'images/products/' + product.image}}" alt="{{ product.name }}">}
   <mat-card-content>{{ product.description }}</mat-card-content>
   <mat-card-actions>
     <p class="price">${{ product.price }}</p>

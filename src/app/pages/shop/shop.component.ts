@@ -5,7 +5,9 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormsModule } from '@angular/forms';
 import { ProductComponent } from './shop-item/shop-item.component';
 import { MatButtonModule } from '@angular/material/button';
+import {MatSelectModule} from '@angular/material/select';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { ProductTypePipe } from './shop-item/product-type.pipe';
 
 export interface Product {
   id: number
@@ -19,7 +21,7 @@ export interface Product {
 
 @Component({
   selector: 'app-shop',
-  imports: [CommonModule, FormsModule, ProductComponent, MatButtonModule, FormsModule, MatFormFieldModule, MatInputModule],
+  imports: [CommonModule, FormsModule, ProductComponent, MatButtonModule, FormsModule, MatFormFieldModule, MatInputModule, MatSelectModule, ProductTypePipe],
   templateUrl: './shop.component.html',
   styleUrls: ['./shop.component.scss']
 })
@@ -27,7 +29,11 @@ export class ShopComponent {
 
   @Input() title: string = 'Art Shop';
   @Output() productAdded = new EventEmitter<Product>();
-  
+
+  types: string[] = ['painting', 'whittling', 'drawing', 'misc']
+  // imagePreview: string | null = null;
+  // selectedFile: File | null = null;
+
   products: Product[] = [
     { id: 1, name: "Sunset Serenity", type: "painting", description: "A vibrant sunset over a calm ocean, capturing the beauty of nature.", price: 120, isInCart: false, image: "sunset-serenity.jpeg" },
     { id: 2, name: "Forest Pathway", type: "painting", description: "An inviting forest trail bathed in golden autumn hues.", price: 150, isInCart: false, image: "forest-pathway.jpeg" },
@@ -50,14 +56,22 @@ export class ShopComponent {
     { id: 19, name: "Handmade Chess Pieces", type: "whittling", description: "A complete set of uniquely crafted wooden chess pieces.", price: 250, isInCart: false, image: "handmade-chess-pieces.jpeg" },
     { id: 20, name: "Surreal Face Sketch", type: "drawing", description: "A surreal portrait blending realism with abstract shapes.", price: 90, isInCart: false, image: "surreal-face-sketch.jpeg" }
   ];
-  
 
-  newProduct: Product = { id: this.getNextId(), name: '', type: 'painting', description: '', price: 0, isInCart: false, image: '' };
+  newProduct: Product = {
+    id: this.getNextId(),
+    name: '',
+    type:
+    this.types[0] as "painting" | "whittling" | "drawing" | "misc",
+    description: '',
+    price: 0,
+    isInCart: false,
+    image: ''
+  };
 
   constructor(private snackBar: MatSnackBar) {}
 
   addProduct(): void {
-    if (this.newProduct.name && this.newProduct.description && this.newProduct.price > 0) {
+    if (this.newProduct.name && this.newProduct.description && this.newProduct.type && this.newProduct.price > 0) {
       this.products.push({ ...this.newProduct });
       this.productAdded.emit(this.newProduct);
       console.log('New product added with id: ' + this.newProduct.id);
@@ -93,4 +107,21 @@ export class ShopComponent {
     const sortedIds = this.products.map(product => product.id).sort((a, b) => a - b);
     return sortedIds[sortedIds.length - 1] + 1;
   }
+/*
+  onFileSelected(event: Event) {
+    const fileInput = event.target as HTMLInputElement;
+    if (fileInput.files && fileInput.files.length > 0) {
+      this.selectedFile = fileInput.files[0];
+  
+      // Save image for new product
+      this.newProduct.image = this.selectedFile.name;
+
+      // Preview of the image
+      const reader = new FileReader();
+      reader.onload = () => {
+        this.imagePreview = reader.result as string;
+      };
+      reader.readAsDataURL(this.selectedFile);
+    }
+  }*/
 }
