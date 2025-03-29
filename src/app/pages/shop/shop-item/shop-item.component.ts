@@ -4,12 +4,13 @@ import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
-import { ProductTypePipe } from './product-type.pipe';
+import { ProductTypePipe } from '../../../shared/pipes/product-type.pipe';
+import { PricePipe } from '../../../shared/pipes/price.pipe';
 
 @Component({
   selector: 'app-product',
   standalone: true,
-  imports: [CommonModule, MatButtonModule, MatIcon, MatCardModule, ProductTypePipe],
+  imports: [CommonModule, MatButtonModule, MatIcon, MatCardModule, ProductTypePipe, PricePipe],
   templateUrl: './shop-item.component.html',
   styleUrls: ['./shop-item.component.scss']
 })

@@ -7,7 +7,8 @@ import { ProductComponent } from './shop-item/shop-item.component';
 import { MatButtonModule } from '@angular/material/button';
 import {MatSelectModule} from '@angular/material/select';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { ProductTypePipe } from './shop-item/product-type.pipe';
+import { ProductTypePipe } from '../../shared/pipes/product-type.pipe';
+import { PricePipe } from '../../shared/pipes/price.pipe';
 
 export interface Product {
   id: number
@@ -21,7 +22,7 @@ export interface Product {
 
 @Component({
   selector: 'app-shop',
-  imports: [CommonModule, FormsModule, ProductComponent, MatButtonModule, FormsModule, MatFormFieldModule, MatInputModule, MatSelectModule, ProductTypePipe],
+  imports: [CommonModule, FormsModule, ProductComponent, MatButtonModule, FormsModule, MatFormFieldModule, MatInputModule, MatSelectModule, ProductTypePipe, PricePipe],
   templateUrl: './shop.component.html',
   styleUrls: ['./shop.component.scss']
 })
@@ -79,6 +80,7 @@ export class ShopComponent {
       this.newProduct = { id: this.getNextId(), name: '', type: 'painting', description: '', price: 0, isInCart: false, image: '' };
     } else {
       this.showSnackbar('Invalid input values!');
+      console.log(this.newProduct);
     }
   }
 

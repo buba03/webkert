@@ -16,7 +16,7 @@
       <mat-label>Type</mat-label>
       <mat-select [(value)]="newProduct.type">
         @for (type of types; track $index) {
-          <mat-option [value]="type">{{ type | productTypeFormatter }}</mat-option>
+          <mat-option [value]="type">{{ type | productType }}</mat-option>
         }
       </mat-select>
     </mat-form-field>    
