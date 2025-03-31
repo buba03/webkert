@@ -53,16 +53,17 @@
         </mat-card>
     </form>
 
-    <div>
-        @for (product of products; track $index) {
-        <app-product [product]="product"></app-product>
-        }
-    </div>
-
     <div class="submit-container">
         <button mat-fab extended color="primary" type="submit" (click)="submitForm()">
             <mat-icon>check</mat-icon>
             Submit
         </button>
+    </div>
+
+    <h1>Contents</h1>
+    <div>
+        @for (product of products; track $index) {
+        <app-product [product]="product"></app-product>
+        }
     </div>
 </div>
