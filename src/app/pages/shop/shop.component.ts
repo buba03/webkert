@@ -8,16 +8,7 @@ import { MatButtonModule } from '@angular/material/button';
 import {MatSelectModule} from '@angular/material/select';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ProductTypePipe } from '../../shared/pipes/product-type.pipe';
-
-export interface Product {
-  id: number;
-  name: string;
-  type: "painting" | "whittling" | "drawing" | "misc";
-  description: string;
-  price: number;
-  isInCart: boolean
-  image: string;
-}
+import { Product } from '../../shared/models/Product';
 
 @Component({
   selector: 'app-shop',
