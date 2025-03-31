@@ -48,3 +48,21 @@ mat-sidenav {
         display: none;
     }
 }
+
+nav ul li {
+    display: flex;
+    align-items: center;
+}
+
+nav ul li a {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+mat-icon {
+    font-size: 25px;
+    vertical-align: middle;
+    display: flex;
+    align-items: center;
+}
