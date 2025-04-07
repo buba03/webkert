@@ -9,7 +9,7 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
-import { ProductComponent } from '../shop/shop-item/shop-item.component';
+import { CartItemComponent } from '../cart/cart-item/cart-item.component';
 
 interface ShippingData {
   firstName: string;
@@ -32,7 +32,7 @@ export interface Product {
 
 @Component({
   selector: 'app-cart',
-  imports: [MatInputModule, MatFormFieldModule, MatSelectModule, MatButtonModule, FormsModule, MatCardModule, MatRadioModule, MatIcon, ProductComponent],
+  imports: [MatInputModule, MatFormFieldModule, MatSelectModule, MatButtonModule, FormsModule, MatCardModule, MatRadioModule, MatIcon, CartItemComponent],
   templateUrl: './cart.component.html',
   styleUrls: ['./cart.component.scss'],
 })
@@ -48,10 +48,10 @@ export class CartComponent {
   };
 
     products: Product[] = [
-      { id: 3, name: "Abstract Chaos", type: "painting", description: "A bold mix of colors and shapes that evoke raw emotion.", price: 180, isInCart: false, image: "abstract-chaos.jpeg" },
-      { id: 12, name: "Sketchbook Doodles", type: "drawing", description: "A collection of expressive doodles sketched in ink.", price: 50, isInCart: false, image: "sketchbook-doodles.jpeg" },
-      { id: 14, name: "Colorful Chaos", type: "painting", description: "An explosion of colors creating a mesmerizing abstract pattern.", price: 200, isInCart: false, image: "colorful-chaos.jpeg" },
-      { id: 20, name: "Surreal Face Sketch", type: "drawing", description: "A surreal portrait blending realism with abstract shapes.", price: 90, isInCart: false, image: "surreal-face-sketch.jpeg" }
+      { id: 3, name: "Abstract Chaos", type: "painting", description: "A bold mix of colors and shapes that evoke raw emotion.", price: 180, isInCart: true, image: "abstract-chaos.jpeg" },
+      { id: 12, name: "Sketchbook Doodles", type: "drawing", description: "A collection of expressive doodles sketched in ink.", price: 50, isInCart: true, image: "sketchbook-doodles.jpeg" },
+      { id: 14, name: "Colorful Chaos", type: "painting", description: "An explosion of colors creating a mesmerizing abstract pattern.", price: 200, isInCart: true, image: "colorful-chaos.jpeg" },
+      { id: 20, name: "Surreal Face Sketch", type: "drawing", description: "A surreal portrait blending realism with abstract shapes.", price: 90, isInCart: true, image: "surreal-face-sketch.jpeg" }
     ];
 
   constructor(

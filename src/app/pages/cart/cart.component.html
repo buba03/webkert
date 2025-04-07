@@ -63,7 +63,9 @@
     <h1>Contents</h1>
     <div>
         @for (product of products; track $index) {
-        <app-product [product]="product"></app-product>
+        @if (product.isInCart) {
+        <app-cart-item [product]="product"></app-cart-item>
+        }
         }
     </div>
 </div>
