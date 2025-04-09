@@ -1,15 +1,9 @@
 <mat-sidenav-container>
-  <mat-sidenav #sidenav>
+  <mat-sidenav position="end" #sidenav>
     <app-header [sidenav]="sidenav" [isLoggedIn]="isLoggedIn" (logoutEvent)="logout()"></app-header>
   </mat-sidenav>
   <mat-sidenav-content>
     <mat-toolbar>
-      <button 
-        mat-button 
-        (click)="onToggleSidenav(sidenav)"
-        class="menu-toggle-button">
-        <mat-icon>menu</mat-icon>
-      </button>
       <div>{{ title }}</div>
       <nav>
         <ul>
@@ -27,6 +21,12 @@
           }
         </ul>
       </nav>
+      <button 
+        mat-button 
+        (click)="onToggleSidenav(sidenav)"
+        class="menu-toggle-button">
+        <mat-icon>menu</mat-icon>
+      </button>
     </mat-toolbar>
     <router-outlet />
   </mat-sidenav-content>

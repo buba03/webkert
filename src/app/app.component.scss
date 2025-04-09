@@ -41,7 +41,8 @@ mat-sidenav {
 
 @media (max-width: 768px) {
     .menu-toggle-button {
-        display: block;
+        margin-left: auto;
+        display: flex;
     }
     
     nav ul {
