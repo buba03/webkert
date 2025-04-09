@@ -2,39 +2,63 @@
     height: 100%;
     display: flex;
     flex-direction: column;
-    background-color: var(--bg-color);
-    border-radius: 8px;
-    box-shadow: var(--box-shadow);
+    align-items: center;
+    justify-content: center;
     padding: 40px 20px;
     text-align: center;
+    gap: 20px;
+    position: relative;
+    z-index: 1;
+}
+
+.background-container {
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    overflow: hidden;
+}
+
+.background-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('../../../../public/images/products/cosmic-vision.jpeg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0.3;
+    z-index: 0;
 }
 
 h1 {
     color: var(--title-color);
-    font-size: 36px;
-    margin-bottom: 16px;
+    font-size: clamp(24px, 5vw, 36px);
+    margin-bottom: 8px;
     font-weight: bold;
 }
 
 p {
     color: var(--secondary-color);
-    font-size: 20px;
-    margin-bottom: 40px;
+    font-size: clamp(16px, 4vw, 20px);
+    margin-bottom: 24px;
 }
 
 .shop {
     background-color: var(--primary-color);
-    width: 300px;
-    margin: 0 auto;
+    width: 200px;
     color: var(--bg-color);
     border: none;
     border-radius: 15px;
-    padding: 12px 30px;
+    padding: 12px 20px;
     font-size: 18px;
     cursor: pointer;
-    transition: background-color 0.3s;
+    transition: background-color 0.3s, transform 0.2s;
+    box-shadow: var(--box-shadow);
 }
 
 .shop:hover {
     background-color: var(--primary-color-hover);
+    transform: scale(1.05);
 }

@@ -1,5 +1,16 @@
-<div class="container">
-    <h1>Welcome to Art Shop</h1>
-    <p>Find art products</p>
-    <button mat-flat-button [routerLink]="['/shop']" routerLinkActive="active" class="shop">Start browsing</button>
-</div>
+<div class="background-container">
+    <div class="background-overlay"></div>
+  
+    <div class="container">
+      <h1>Welcome to Art Shop</h1>
+      <p>Your one-stop destination for unique and inspiring art products.</p>
+      <button mat-flat-button 
+              [routerLink]="['/shop']" 
+              routerLinkActive="active" 
+              class="shop" 
+              aria-label="Start browsing our shop">
+          Start Browsing
+      </button>
+    </div>
+  </div>
+  
