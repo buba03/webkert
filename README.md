@@ -1,3 +1,3 @@
 # Art Shop
 
-Projekt neve: **Art Shop**
+Kézműves termékek webshopja
