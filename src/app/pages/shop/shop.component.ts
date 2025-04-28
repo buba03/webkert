@@ -1,14 +1,17 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Router, RouterLink } from '@angular/router';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormsModule } from '@angular/forms';
 import { ProductComponent } from './shop-item/shop-item.component';
 import { MatButtonModule } from '@angular/material/button';
-import {MatSelectModule} from '@angular/material/select';
+import { MatSelectModule } from '@angular/material/select';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ProductTypePipe } from '../../shared/pipes/product-type.pipe';
 import { Product } from '../../shared/models/Product';
+import { Auth, authState, User } from '@angular/fire/auth';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-shop',
@@ -18,6 +21,7 @@ import { Product } from '../../shared/models/Product';
 })
 export class ShopComponent {
 
+  @Input() isLoggedIn: boolean = false;
   @Input() title: string = 'Art Shop';
   @Output() productAdded = new EventEmitter<Product>();
 
@@ -59,7 +63,11 @@ export class ShopComponent {
     image: ''
   };
 
-  constructor(private snackBar: MatSnackBar) {}
+  currentUser: Observable<User | null>;
+
+  constructor(private snackBar: MatSnackBar, private router: Router, private auth: Auth,) {
+    this.currentUser = authState(this.auth);
+  }
 
   addProduct(): void {
     if (this.newProduct.name && this.newProduct.description && this.newProduct.type && this.newProduct.price > 0) {
@@ -84,6 +92,11 @@ export class ShopComponent {
   }
 
   addToCart(product: Product): void {
+    console.log(localStorage.getItem('isLoggedIn') === 'false')
+    if (localStorage.getItem('isLoggedIn') === 'false') {
+      this.router.navigateByUrl('/login');
+      return;
+    }
     product.isInCart = !product.isInCart;
     console.log(product.isInCart ? `Added to cart: ${product.name}` : `Removed from cart: ${product.name}`);
   }
