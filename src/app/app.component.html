@@ -11,9 +11,7 @@
           <li><a routerLink="/shop"><mat-icon>store</mat-icon>Shop</a></li>
           <li><a routerLink="/cart"><mat-icon>shopping_cart</mat-icon>Cart</a></li>
           @if (isLoggedIn) {
-            <!--
-              <li><a routerLink="/profile"><mat-icon>person</mat-icon>Profile</a></li>
-            -->
+            <li><a routerLink="/profile"><mat-icon>person</mat-icon>Profile</a></li>
             <li><a href="#" (click)="$event.preventDefault(); logout()"><mat-icon>logout</mat-icon>Log out</a></li>
           }
           @else {

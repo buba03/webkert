@@ -6,6 +6,7 @@ import { MatIcon } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
 import { ProductTypePipe } from '../../../shared/pipes/product-type.pipe';
 import { PricePipe } from '../../../shared/pipes/price.pipe';
+import { UserService } from '../../../shared/services/user.service';
 
 @Component({
   selector: 'app-cart-item',
@@ -18,8 +19,20 @@ export class CartItemComponent {
   @Input() product!: Product;
   @Output() inCart = new EventEmitter<Product>();
 
+  constructor(private userService: UserService) {}
+
   toggleInCart(): void {
-    this.product.isInCart = false;
-    this.inCart.emit(this.product);
+    if (this.product.isInCart) {
+      this.userService.removeProductFromCart(this.product.id).subscribe({
+        next: () => {
+          console.log(`Removed from cart: ${this.product.name}`);
+          this.product.isInCart = false;
+          this.inCart.emit(this.product);
+        },
+        error: (err) => {
+          console.log('Failed to remove from cart: ' + err.message);
+        }
+      });
+    }
   }
 }

@@ -8,6 +8,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { User } from '../../shared/models/User';
+import { AuthService } from '../../shared/services/auth.service';
 
 @Component({
   selector: 'app-register',
@@ -35,45 +36,69 @@ export class RegisterComponent {
       lastname: new FormControl('', [Validators.required, Validators.minLength(2)])
     })
   });
-  
+
   isLoading = false;
   showForm = true;
   registerError = '';
 
-  constructor(private router: Router) {}
+  constructor(
+    private router: Router,
+    private authService: AuthService
+  ) {}
 
   register(): void {
     if (this.registerForm.invalid) {
-      this.registerError = 'Please correct the form errors before submitting.';
+      this.registerError = 'Please correct any errors on the form before submitting.';
       return;
     }
 
-    const password = this.registerForm.get('password');
-    const rePassword = this.registerForm.get('rePassword');
-
-    if (password?.value !== rePassword?.value) {
-      this.registerError = 'Passwords do not match.';
+    const password = this.registerForm.get('password')?.value;
+    const rePassword = this.registerForm.get('rePassword')?.value;
+    
+    if (password !== rePassword) {
+      this.registerError = 'The passwords do not match.';
       return;
     }
 
     this.isLoading = true;
     this.showForm = false;
 
-    const newUser: User = {
+    const userData: Partial<User> = {
       name: {
         firstname: this.registerForm.value.name?.firstname || '',
         lastname: this.registerForm.value.name?.lastname || ''
       },
       email: this.registerForm.value.email || '',
-      password: this.registerForm.value.password || '',
       products_in_cart: [],
     };
 
-    console.log('New user:', newUser);
-    console.log('Form value:', this.registerForm.value);
+    const email = this.registerForm.value.email || '';
+    const pw = this.registerForm.value.password || '';
 
-    setTimeout(() => {
-      this.router.navigateByUrl('/home');
-    }, 1500);
+    this.authService.signUp(email, pw, userData)
+      .then(userCredential => {
+        console.log('Registration succesful:', userCredential.user);
+        this.authService.updateLoginStatus(true);
+        this.router.navigateByUrl('/home');
+      })
+      .catch(error => {
+        console.error('Regisztrációs hiba:', error);
+        this.isLoading = false;
+        this.showForm = true;
+        
+        switch(error.code) {
+          case 'auth/email-already-in-use':
+            this.registerError = 'This email already in use.';
+            break;
+          case 'auth/invalid-email':
+            this.registerError = 'Invalid email.';
+            break;
+          case 'auth/weak-password':
+            this.registerError = 'The password is too weak. Use at least 6 characters.';
+            break;
+          default:
+            this.registerError = 'An error has occurred during registration. Please try again later.';
+        }
+      });
   }
 }

@@ -4,6 +4,6 @@ export interface Product {
     type: 'painting' | 'whittling' | 'drawing' | 'misc';
     description: string;
     price: number;
-    isInCart: boolean;
+    isInCart?: boolean;
     image: string;
 }

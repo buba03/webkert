@@ -1,1 +1,60 @@
-<p>profile works!</p>
+<div class="profile-container">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>User Profile</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        @if (isLoading) {
+          <div class="loading-container">
+            <p>Loading profile data...</p>
+          </div>
+        } @else if (user) {
+          <div class="profile-info">
+            <div class="user-details">
+                <table>
+                    <tbody>
+                    <tr>
+                        <td><mat-icon>person</mat-icon></td>
+                        <td>First name: </td>
+                        <td>{{ user.name.firstname }}</td>
+                    </tr>
+                    <tr>
+                        <td><mat-icon>person</mat-icon></td>
+                        <td>Last name: </td>
+                        <td>{{ user.name.lastname }}</td>
+                    </tr>
+                    <tr>
+                        <td><mat-icon>alternate_email</mat-icon></td>
+                        <td>Email: </td>
+                        <td>{{ user.email }}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+          </div>
+          <div class="cart-section">
+            <h2>Cart contents</h2>
+            @if (this.products_in_cart.length === 0) {
+              <div class="empty-state">
+                <mat-icon>production_quantity_limits</mat-icon>
+                <p>No items found in the cart.</p>
+              </div>
+            } @else {
+              <div class="product-cards">
+                @for (product of this.products_in_cart; track $index) {
+                    @if (product.isInCart) {
+                      <app-cart-item [product]="product"></app-cart-item>
+                    }
+                }
+            </div>
+            }
+          </div>
+        } @else {
+          <div class="empty-state">
+            <mat-icon>person_off</mat-icon>
+            <p>No user profile found. Please log in.</p>
+          </div>
+        }
+      </mat-card-content>
+    </mat-card>
+  </div>
