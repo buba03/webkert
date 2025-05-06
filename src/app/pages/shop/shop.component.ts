@@ -31,7 +31,7 @@ export class ShopComponent implements OnInit {
   products: Product[] = [];
 
   newProduct: Product = {
-    id: this.getNextId(),
+    id: 0,
     name: '',
     type:
     this.types[0] as "painting" | "whittling" | "drawing" | "misc",
@@ -59,27 +59,38 @@ export class ShopComponent implements OnInit {
         
         this.getProductIdsFromCart().subscribe({
           next: (ids) => {
-            console.log("Cart IDs:", ids);
             products.forEach((product) => {
               if (ids.includes(product.id)) {
                 product.isInCart = true;
-                console.log(product);
               }
             });
           }
         });
       }
       this.products = products;
+      console.log(this.products);
     });
   }
 
   addProduct(): void {
+    if (localStorage.getItem('isLoggedIn') === 'false') {
+      this.router.navigateByUrl('/login');
+      return;
+    }
     if (this.newProduct.name && this.newProduct.description && this.newProduct.type && this.newProduct.price > 0) {
-      this.products.push({ ...this.newProduct });
-      this.productAdded.emit(this.newProduct);
-      console.log('New product added with id: ' + this.newProduct.id);
-
-      this.newProduct = { id: this.getNextId(), name: '', type: 'painting', description: '', price: 0, isInCart: false, image: '' };
+      this.newProduct.id = this.getNextId();
+      this.productService.addProduct(this.newProduct).subscribe({
+        next: () => {
+          this.showSnackbar('Product created successfully.');
+          this.products.push({ ...this.newProduct });
+          this.productAdded.emit(this.newProduct);
+          console.log('New product added with id: ' + this.newProduct.id);
+          this.newProduct = { id: this.getNextId(), name: '', type: 'painting', description: '', price: 0, isInCart: false, image: '' };
+        },
+        error: (err) => {
+          this.showSnackbar(err.message);
+        }
+      });
     } else {
       this.showSnackbar('Invalid input values!');
       console.log(this.newProduct);
@@ -138,6 +149,7 @@ export class ShopComponent implements OnInit {
   }
 
   getNextId(): number {
+    console.log(this.products);
     if (this.products.length === 0) {
       return 1;
     }
