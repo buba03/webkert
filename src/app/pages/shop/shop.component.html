@@ -1,39 +1,54 @@
 <div class="shop-container">
   <h1>{{ title }}</h1>
 
-  <div class="add-product">
-    <mat-form-field appearance="outline">
-      <mat-label>Product Name</mat-label>
-      <input matInput type="text" [(ngModel)]="newProduct.name">
-    </mat-form-field>
-
-    <mat-form-field appearance="outline">
-      <mat-label>Description</mat-label>
-      <input matInput type="text" [(ngModel)]="newProduct.description">
-    </mat-form-field>
-
-    <mat-form-field appearance="outline">
-      <mat-label>Type</mat-label>
-      <mat-select [(value)]="newProduct.type">
-        @for (type of types; track $index) {
-          <mat-option [value]="type">{{ type | productType }}</mat-option>
-        }
-      </mat-select>
-    </mat-form-field>    
-
-    <mat-form-field appearance="outline">
-      <mat-label>Price</mat-label>
-      <input matInput type="number" [(ngModel)]="newProduct.price">
-    </mat-form-field>
-
-    <!--
-    <label>Product Image</label>
-    <input type="file" (change)="onFileSelected($event)" accept="image/*">
-
-    <img *ngIf="imagePreview" [src]="imagePreview" alt="Preview" class="preview-image">
-    -->
-
-    <button mat-stroked-button (click)="addProduct()">Add Product</button>
+  <div class="controls-container">
+    <div class="controls-header">
+      <span>Controls:</span>
+      <button mat-icon-button [ngClass]="{ active: activeControl === 'filter' }" (click)="setActiveControl('filter')">
+        <mat-icon>filter_alt</mat-icon>
+      </button>
+      <button mat-icon-button [ngClass]="{ active: activeControl === 'add' }" (click)="setActiveControl('add')">
+        <mat-icon>add</mat-icon>
+      </button>
+      <button mat-icon-button [ngClass]="{ active: activeControl === 'delete' }" (click)="setActiveControl('delete')">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </div>
+    @if (this.activeControl === 'add') {
+      <div class="add-product">
+        <mat-form-field appearance="outline">
+          <mat-label>Product Name</mat-label>
+          <input matInput type="text" [(ngModel)]="newProduct.name">
+        </mat-form-field>
+    
+        <mat-form-field appearance="outline">
+          <mat-label>Description</mat-label>
+          <input matInput type="text" [(ngModel)]="newProduct.description">
+        </mat-form-field>
+    
+        <mat-form-field appearance="outline">
+          <mat-label>Type</mat-label>
+          <mat-select [(value)]="newProduct.type">
+            @for (type of types; track $index) {
+              <mat-option [value]="type">{{ type | productType }}</mat-option>
+            }
+          </mat-select>
+        </mat-form-field>    
+    
+        <mat-form-field appearance="outline">
+          <mat-label>Price</mat-label>
+          <input matInput type="number" [(ngModel)]="newProduct.price">
+        </mat-form-field>
+    
+        <button mat-stroked-button (click)="addProduct()">Add Product</button>
+      </div>
+    }
+    @if (this.activeControl === 'delete') {
+      <div class="delete-product">Delete</div>
+    }
+    @if (this.activeControl === 'filter') {
+      <div class="filter-product">Filter</div>
+    }
   </div>
 
   <div class="product-grid">

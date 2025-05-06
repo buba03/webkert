@@ -14,10 +14,11 @@ import { Auth, authState, User } from '@angular/fire/auth';
 import { ProductService } from '../../shared/services/product.service';
 import { UserService } from '../../shared/services/user.service';
 import { Observable, switchMap, of } from 'rxjs';
+import { MatIcon } from '@angular/material/icon';
 
 @Component({
   selector: 'app-shop',
-  imports: [CommonModule, FormsModule, ProductComponent, MatButtonModule, FormsModule, MatFormFieldModule, MatInputModule, MatSelectModule, ProductTypePipe],
+  imports: [CommonModule, FormsModule, ProductComponent, MatButtonModule, FormsModule, MatFormFieldModule, MatInputModule, MatSelectModule, ProductTypePipe, MatIcon],
   templateUrl: './shop.component.html',
   styleUrls: ['./shop.component.scss']
 })
@@ -143,17 +144,22 @@ export class ShopComponent implements OnInit {
     );
   }
   
-
   trackById(index: number, item: Product): number {
     return item.id;
   }
 
   getNextId(): number {
-    console.log(this.products);
     if (this.products.length === 0) {
       return 1;
     }
     const sortedIds = this.products.map(product => product.id).sort((a, b) => a - b);
     return sortedIds[sortedIds.length - 1] + 1;
+  }
+
+  activeControl: 'add' | 'delete' | 'filter' | null = 'filter';
+
+  setActiveControl(control: 'add' | 'delete' | 'filter') {
+    this.activeControl = this.activeControl === control ? null : control;
+    console.log(this.activeControl);
   }
 }

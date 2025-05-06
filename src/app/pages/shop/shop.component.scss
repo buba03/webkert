@@ -1,36 +1,45 @@
-.add-product {
-  background: var(--bg-color);
+.controls-container {
   padding: 15px;
   border-radius: 8px;
   box-shadow: var(--box-shadow);
-  text-align: left;
   max-width: 1000px;
-  margin: 20px auto;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 15px;
-  justify-content: center;
-  align-items: center;
+  margin-bottom: 25px;
 
-  mat-form-field {
-    flex: 1;
-    min-width: 200px;
+  .controls-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    button.active {
+      background-color: var(--primary-color);
+
+      mat-icon {
+        color: var(--bg-color);
+      }
+    }
   }
 
-  button {
-    height: 56px;
-    align-self: stretch;
-    border-radius: 4px;
-  }
-
-  .preview-image {
-    width: 100px;
-    height: auto;
-    margin-top: 10px;
-    border-radius: 8px;
-    box-shadow: var(--box-shadow);
+  .add-product {
+    margin: 20px auto;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: center;
+    align-items: center;
+  
+    mat-form-field {
+      flex: 1;
+      min-width: 200px;
+    }
+  
+    button {
+      height: 56px;
+      align-self: stretch;
+      border-radius: 4px;
+    }
   }
 }
+
 
 .shop-container {
   text-align: center;
