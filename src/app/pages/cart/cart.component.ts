@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -10,25 +10,11 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { CartItemComponent } from '../cart/cart-item/cart-item.component';
-
-interface ShippingData {
-  firstName: string;
-  lastName: string;
-  email: string;
-  phoneNumber: string;
-  country: string;
-  address: string;
-  paymentMethod: string;
-}
-export interface Product {
-  id: number;
-  name: string;
-  type: "painting" | "whittling" | "drawing" | "misc";
-  description: string;
-  price: number;
-  isInCart: boolean
-  image: string;
-}
+import { Subscription } from 'rxjs';
+import { UserService } from '../../shared/services/user.service';
+import { User } from '../../shared/models/User';
+import { Product } from '../../shared/models/Product';
+import { ShippingData } from '../../shared/models/ShippingData';
 
 @Component({
   selector: 'app-cart',
@@ -36,7 +22,10 @@ export interface Product {
   templateUrl: './cart.component.html',
   styleUrls: ['./cart.component.scss'],
 })
-export class CartComponent {
+export class CartComponent implements OnInit, OnDestroy {
+  user: User | null = null;
+  products_in_cart: Product[] = [];
+
   shippingData: ShippingData = {
     firstName: '',
     lastName: '',
@@ -47,17 +36,42 @@ export class CartComponent {
     paymentMethod: '',
   };
 
-    products: Product[] = [
-      { id: 3, name: "Abstract Chaos", type: "painting", description: "A bold mix of colors and shapes that evoke raw emotion.", price: 180, isInCart: true, image: "abstract-chaos.jpeg" },
-      { id: 12, name: "Sketchbook Doodles", type: "drawing", description: "A collection of expressive doodles sketched in ink.", price: 50, isInCart: true, image: "sketchbook-doodles.jpeg" },
-      { id: 14, name: "Colorful Chaos", type: "painting", description: "An explosion of colors creating a mesmerizing abstract pattern.", price: 200, isInCart: true, image: "colorful-chaos.jpeg" },
-      { id: 20, name: "Surreal Face Sketch", type: "drawing", description: "A surreal portrait blending realism with abstract shapes.", price: 90, isInCart: true, image: "surreal-face-sketch.jpeg" }
-    ];
-
   constructor(
     private snackBar: MatSnackBar,
-    private router: Router
+    private router: Router,
+    private userService: UserService
   ) {}
+
+  private subscription: Subscription | null = null;
+
+  ngOnInit(): void {
+    this.loadUserProfile();
+  }
+
+  ngOnDestroy(): void {
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
+  }
+
+  loadUserProfile(): void {
+    this.subscription = this.userService.getUserProfile().subscribe({
+      next: (data) => {
+        this.user = data.user;
+        this.products_in_cart = data.products_in_cart;
+
+        if (this.user) {
+          this.shippingData.firstName = this.user?.name.firstname;
+          this.shippingData.lastName = this.user?.name.lastname;
+          this.shippingData.email = this.user?.email;
+        }
+
+      },
+      error: (error) => {
+        console.error('An errror occured while loading the profile: ', error);
+      }
+    });
+  }
 
   submitForm() {
     if (

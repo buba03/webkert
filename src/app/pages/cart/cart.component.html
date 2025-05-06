@@ -59,10 +59,11 @@
             Submit
         </button>
     </div>
-
+</div>
+<div class="product-grid">
     <h1>Contents</h1>
-    <div>
-        @for (product of products; track $index) {
+    <div class="product-cards">
+        @for (product of products_in_cart; track $index) {
         @if (product.isInCart) {
         <app-cart-item [product]="product"></app-cart-item>
         }
