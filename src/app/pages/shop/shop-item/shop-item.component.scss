@@ -72,9 +72,9 @@
     }
 
     &.clicked:hover {
-      background: var(--bg-color);
-      color: var(--primary-color);
-      border: 2px solid var(--primary-color);
+      background: black;
+      color: var(--warning-color);
+      border: 2px solid var(--warning-color);
       opacity: 0.8;
     }
   }
