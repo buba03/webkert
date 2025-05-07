@@ -11,6 +11,7 @@ import {
 } from '@angular/fire/firestore';
 import { Product } from '../models/Product';
 import { from, Observable } from 'rxjs';
+import { setDoc } from '@angular/fire/firestore';
 
 @Injectable({
   providedIn: 'root'
@@ -31,15 +32,16 @@ export class ProductService {
     );
   }
 
+
+
   addProduct(product: Product): Observable<void> {
-    const productQuery = getDocs(
-      collection(this.firestore, 'Products')
-    ).then(snapshot => {
+    const productQuery = getDocs(this.productsRef).then(snapshot => {
       const existing = snapshot.docs.find(doc => (doc.data() as Product).id === product.id);
       if (existing) {
         throw new Error(`Product with id ${product.id} already exists.`);
       } else {
-        return addDoc(this.productsRef, product).then(() => {});
+        const productDoc = doc(this.firestore, 'Products', product.id.toString());
+        return setDoc(productDoc, product).then(() => {});
       }
     });
   
@@ -52,8 +54,9 @@ export class ProductService {
     return from(updateDoc(productDoc, updatedData));
   }
 
-  deleteProduct(productId: string): Observable<void> {
-    const productDoc = doc(this.firestore, 'Products', productId);
+  deleteProduct(productId: number): Observable<void> {
+    // TODO: remove from cart as well
+    const productDoc = doc(this.firestore, 'Products', productId.toString());
     return from(deleteDoc(productDoc));
   }
 }

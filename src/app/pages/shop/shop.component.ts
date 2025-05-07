@@ -156,10 +156,32 @@ export class ShopComponent implements OnInit {
     return sortedIds[sortedIds.length - 1] + 1;
   }
 
+  // Controls
   activeControl: 'add' | 'delete' | 'filter' | null = 'filter';
-
   setActiveControl(control: 'add' | 'delete' | 'filter') {
     this.activeControl = this.activeControl === control ? null : control;
-    console.log(this.activeControl);
+  }
+
+  // Delete
+  selectedProductId: number | null = null;
+  deleteSelectedProduct(): void {
+    if (localStorage.getItem('isLoggedIn') === 'false') {
+      this.router.navigateByUrl('/login');
+      return;
+    }
+    if (this.selectedProductId === null) {
+      this.showSnackbar("Please select a product to delete.");
+      return;
+    }
+    this.productService.deleteProduct(this.selectedProductId).subscribe({
+      next: () => {
+        this.products = this.products.filter(p => p.id !== this.selectedProductId);
+        this.selectedProductId = null;
+        this.showSnackbar("Product deleted successfully.");
+      },
+      error: (err) => {
+        this.showSnackbar("Failed to delete product: " + err.message);
+      }
+    });
   }
 }

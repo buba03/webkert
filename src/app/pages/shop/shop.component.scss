@@ -3,6 +3,7 @@
   border-radius: 8px;
   box-shadow: var(--box-shadow);
   max-width: 1000px;
+  margin: auto;
   margin-bottom: 25px;
 
   .controls-header {
@@ -19,7 +20,7 @@
     }
   }
 
-  .add-product {
+  .add-product, .delete-product, .filter-product {
     margin: 20px auto;
     display: flex;
     flex-wrap: wrap;

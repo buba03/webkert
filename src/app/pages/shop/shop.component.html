@@ -44,10 +44,25 @@
       </div>
     }
     @if (this.activeControl === 'delete') {
-      <div class="delete-product">Delete</div>
+      <div class="delete-product">
+        <mat-form-field appearance="outline">
+          <mat-label>Select a Product to Delete</mat-label>
+          <mat-select [(value)]="selectedProductId">
+            @for (product of products; track product.id) {
+              <mat-option [value]="product.id">{{ product.name }}</mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+      
+        <button mat-stroked-button (click)="deleteSelectedProduct()">
+          Delete Product
+        </button>
+      </div>
     }
     @if (this.activeControl === 'filter') {
-      <div class="filter-product">Filter</div>
+      <div class="filter-product">
+
+      </div>
     }
   </div>
 
