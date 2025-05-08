@@ -55,6 +55,10 @@ export class ShopComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.listProducts();
+  }
+
+  listProducts(): void {
     this.productService.getAllProducts().subscribe(products => {
       if(this.currentUser) {
         
@@ -69,7 +73,6 @@ export class ShopComponent implements OnInit {
         });
       }
       this.products = products;
-      console.log(this.products);
     });
   }
 
@@ -182,6 +185,64 @@ export class ShopComponent implements OnInit {
       error: (err) => {
         this.showSnackbar("Failed to delete product: " + err.message);
       }
+    });
+  }
+
+  // Queries
+  listProductsNotInCart(): void {
+    if (localStorage.getItem('isLoggedIn') === 'false') {
+      this.router.navigateByUrl('/login');
+      return;
+    }
+  
+    this.userService.getUserProfile().subscribe({
+      next: (userData) => {
+        this.productService.getProductsNotInCart(userData).subscribe({
+          next: (products) => {
+            this.products = products;
+          },
+          error: (err) => {
+            this.showSnackbar("Failed to fetch products: " + err.message);
+          }
+        });
+      },
+      error: (err) => {
+        this.showSnackbar("Failed to fetch user data: " + err.message);
+      }
+    });
+  }  
+  listProductsByType(type: string): void {
+    this.productService.getProductsByTypeAscPrice(type).subscribe(products => {
+      if(this.currentUser) {
+        
+        this.getProductIdsFromCart().subscribe({
+          next: (ids) => {
+            products.forEach((product) => {
+              if (ids.includes(product.id)) {
+                product.isInCart = true;
+              }
+            });
+          }
+        });
+      }
+      this.products = products;
+    });
+  }
+  listExpensiveProducts(price: number): void {
+    this.productService.getExpensiveProducts(price).subscribe(products => {
+      if(this.currentUser) {
+        
+        this.getProductIdsFromCart().subscribe({
+          next: (ids) => {
+            products.forEach((product) => {
+              if (ids.includes(product.id)) {
+                product.isInCart = true;
+              }
+            });
+          }
+        });
+      }
+      this.products = products;
     });
   }
 }

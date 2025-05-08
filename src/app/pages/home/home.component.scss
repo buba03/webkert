@@ -62,3 +62,17 @@ p {
     background-color: var(--primary-color-hover);
     transform: scale(1.05);
 }
+
+
+.featured-products {
+    text-align: center;
+    padding: 20px;
+  
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 20px;
+      max-width: 1000px;
+      margin: auto;
+    }
+  }

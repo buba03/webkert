@@ -11,6 +11,15 @@
               aria-label="Start browsing our shop">
           Start Browsing
       </button>
+
+      <h1>Featured Products</h1>
+    </div>
+    <div class="featured-products">
+      <div class="product-grid">
+        @for (product of products; track $index) {
+          <app-product [product]="product"></app-product>
+        }
+      </div>
     </div>
   </div>
   

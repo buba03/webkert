@@ -7,11 +7,17 @@ import {
   CollectionReference,
   doc,
   updateDoc,
-  deleteDoc
+  deleteDoc,
+  query,
+  where,
+  orderBy,
+  limit,
+  Query,
 } from '@angular/fire/firestore';
 import { Product } from '../models/Product';
 import { from, Observable } from 'rxjs';
 import { setDoc } from '@angular/fire/firestore';
+import { User } from '../models/User';
 
 @Injectable({
   providedIn: 'root'
@@ -59,4 +65,42 @@ export class ProductService {
     const productDoc = doc(this.firestore, 'Products', productId.toString());
     return from(deleteDoc(productDoc));
   }
+
+  // Queries
+  getExpensiveProducts(minPrice: number): Observable<Product[]> {
+    const q = query(
+      this.productsRef,
+      where('price', '>', minPrice),
+      orderBy('price', 'desc')
+    );
+    return from(getDocs(q).then(snapshot => snapshot.docs.map(doc => doc.data() as Product)));
+  }
+  getProductsByTypeAscPrice(type: string): Observable<Product[]> {
+    const q = query(
+      this.productsRef,
+      where('type', '==', type),
+      orderBy('price', 'asc')
+    );
+    return from(getDocs(q).then(snapshot => snapshot.docs.map(doc => doc.data() as Product)));
+  }
+  getTopFiveAlphabetical(): Observable<Product[]> {
+    const q = query(
+      this.productsRef,
+      orderBy('name', 'asc'),
+      limit(5)
+    );
+    return from(getDocs(q).then(snapshot => snapshot.docs.map(doc => doc.data() as Product)));
+  }
+  getProductsNotInCart(userData: { products_in_cart: { id: number }[] }): Observable<Product[]> {
+    const productIdsInCart = userData.products_in_cart.map(p => p.id);
+
+    return from(
+      getDocs(this.productsRef).then(snapshot => {
+        return snapshot.docs
+          .map(doc => doc.data() as Product)
+          .filter(product => !productIdsInCart.includes(product.id));
+      })
+    );
+  }
+        
 }

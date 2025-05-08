@@ -1,0 +1,15 @@
+<a [routerLink]="['/shop']" style="text-decoration: none;">
+  <mat-card class="product-card" appearance="outlined" style="cursor: pointer;">
+    <mat-card-header>
+      <mat-card-title>{{ product.name }}</mat-card-title>
+      <mat-card-subtitle>{{ product.type | productType }}</mat-card-subtitle>
+    </mat-card-header>
+    @if (product.image) {
+      <img mat-card-image src="{{'images/products/' + product.image}}" alt="{{ product.name }}">
+    }
+    <mat-card-content>{{ product.description }}</mat-card-content>
+    <mat-card-actions>
+      <p class="price">{{ product.price | price }}</p>
+    </mat-card-actions>
+  </mat-card>
+</a>

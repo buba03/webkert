@@ -61,7 +61,34 @@
     }
     @if (this.activeControl === 'filter') {
       <div class="filter-product">
-
+        <button mat-stroked-button extended (click)="listProductsNotInCart()">
+          <mat-icon>remove_shopping_cart</mat-icon>
+          Not in Cart
+        </button>
+        <button mat-stroked-button extended (click)="listExpensiveProducts(100)">
+          <mat-icon>attach_money</mat-icon>
+          Expensive
+        </button>
+        <button mat-stroked-button extended (click)="listProductsByType('painting')">
+          <mat-icon>brush</mat-icon>
+          Painting
+        </button>
+        <button mat-stroked-button extended (click)="listProductsByType('whittling')">
+          <mat-icon>carpenter</mat-icon>
+          Whittling
+        </button>
+        <button mat-stroked-button extended (click)="listProductsByType('drawing')">
+          <mat-icon>draw</mat-icon>
+          Drawing
+        </button>
+        <button mat-stroked-button extended (click)="listProductsByType('misc')">
+          <mat-icon>more_horiz</mat-icon>
+          Miscallenoues
+        </button>
+        <button mat-stroked-button extended (click)="listProducts()">
+          <mat-icon>filter_alt_off</mat-icon>
+          No Filter
+        </button>
       </div>
     }
   </div>
