@@ -39,7 +39,7 @@ export class ShopComponent implements OnInit {
     description: '',
     price: 0,
     isInCart: false,
-    image: ''
+    image: 'image_placeholder.png'
   };
 
   currentUser: Observable<User | null>;
@@ -89,7 +89,7 @@ export class ShopComponent implements OnInit {
           this.products.push({ ...this.newProduct });
           this.productAdded.emit(this.newProduct);
           console.log('New product added with id: ' + this.newProduct.id);
-          this.newProduct = { id: this.getNextId(), name: '', type: 'painting', description: '', price: 0, isInCart: false, image: '' };
+          this.newProduct = { id: this.getNextId(), name: '', type: 'painting', description: '', price: 0, isInCart: false, image: 'image_placeholder.png' };
         },
         error: (err) => {
           this.showSnackbar(err.message);
